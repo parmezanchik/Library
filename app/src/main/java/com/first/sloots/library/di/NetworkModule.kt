@@ -13,7 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-private const val BASE_URL = "https://developer.nytimes.com"
+private const val BASE_URL = "https://api.nytimes.com/"
 private const val HTTP_LOGGING_INTERCEPTOR = "HTTP_LOGGING_INTERCEPTOR"
 private const val TIMEOUT_SEC: Long = 180
 val networkModule = module {
