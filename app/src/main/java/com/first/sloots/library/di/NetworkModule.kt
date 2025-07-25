@@ -7,6 +7,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttp
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -38,6 +39,6 @@ val networkModule = module {
             level = HttpLoggingInterceptor.Level.BODY
         }
     }
-    single<NetworkManager> { NetworkManagerImpl(get()) }
+    single<NetworkManager> { NetworkManagerImpl(context = androidContext(), bookApi = get()) }
 }
 

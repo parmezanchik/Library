@@ -1,5 +1,6 @@
 package com.first.sloots.library.data.network.model.books
 
+import com.first.sloots.library.data.db.entity.BookEntity
 import com.first.sloots.library.data.network.model.BuyLinksItem
 import com.first.sloots.library.data.network.model.IsbnsItem
 import com.first.sloots.library.ui.book.model.BooksDM
@@ -91,14 +92,6 @@ data class BooksItem(
     @field:SerializedName("first_chapter_link")
 	val firstChapterLink: String? = null
 )
-fun BooksItem.toBooksDM(): BooksDM {
-    return BooksDM(
-        title = this.title.orEmpty(),
-        description = this.description.orEmpty(),
-        author = this.author.orEmpty(),
-        publisher = this.publisher.orEmpty(),
-        imageUrl = this.bookImage.orEmpty(),
-        rank = this.rank ?: 0,
-        buyLink = this.amazonProductUrl.orEmpty()
-    )
-}
+
+
+

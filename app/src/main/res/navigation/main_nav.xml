@@ -33,8 +33,21 @@
         android:id="@+id/bookDetailsFragment"
         android:name="com.first.sloots.library.ui.book.BookDetailsFragment"
         android:label="BookDetailsFragment" >
-    <argument
-        android:name="book"
-        app:argType="com.first.sloots.library.ui.book.model.BooksDM" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="buyLink"
+            app:argType="string"
+            android:defaultValue="" />
     </fragment>
 </navigation>

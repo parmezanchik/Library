@@ -8,6 +8,7 @@ import com.first.sloots.library.data.db.entity.BookEntity
 
 @Dao
 interface BookDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(book: BookEntity)
 
@@ -18,7 +19,11 @@ interface BookDao {
     suspend fun getBooks(): List<BookEntity>
 
     @Query("SELECT * FROM books WHERE idKey = :id")
-    suspend fun getBookById(id: Int): List<BookEntity>
+    suspend fun getBookById(id: Int): BookEntity?
 
+    @Query("SELECT * FROM books WHERE categoryId = :categoryId")
+    suspend fun getBooksByCategory(categoryId: String): List<BookEntity>
 
+    @Query("DELETE FROM books WHERE categoryId = :categoryId")
+    suspend fun deleteBooksByCategory(categoryId: String)
 }

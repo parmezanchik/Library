@@ -8,16 +8,19 @@ import com.first.sloots.library.data.usecase.category.CategoryUseCase
 import com.first.sloots.library.data.usecase.category.CategoryUseCaseImpl
 import com.first.sloots.library.data.usecase.overview.OverviewUseCase
 import com.first.sloots.library.data.usecase.overview.OverviewUseCaseImpl
+import com.first.sloots.library.data.usecase.setting.SettingsUseCase
+import com.first.sloots.library.data.usecase.setting.SettingsUseCaseImpl
 import org.koin.dsl.module
 
 val useCaseModule = module {
 
 
 
-    single<BooksUseCase> { BooksUseCaseImpl() }
-    single<CategoryUseCase> { CategoryUseCaseImpl() }
+    single<BooksUseCase> { BooksUseCaseImpl(get()) }
+    single<CategoryUseCase> { CategoryUseCaseImpl(get()) }
     single<OverviewUseCase> { OverviewUseCaseImpl(get()) }
-    single<CategoryRepository> { CategoryRepositoryImpl(get()) }
+    single<CategoryRepository> { CategoryRepositoryImpl(get(),get(),get(),get()) }
+    single<SettingsUseCase> { SettingsUseCaseImpl(get()) }
 
 
 }

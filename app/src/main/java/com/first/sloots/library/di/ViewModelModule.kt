@@ -7,7 +7,7 @@ import org.koin.dsl.module
 
 
 val viewModelModule = module {
-    viewModel { BooksViewModel(repository = get()) }
-    viewModel { BooksViewModel(get()) }
+    viewModel { BooksViewModel(get(),get(),get()) }
+    viewModel { BooksViewModel(get(),get(),get()) }
     viewModel { CategoryViewModel(get()) }
 }

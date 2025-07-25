@@ -35,25 +35,34 @@ class BooksListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         adapter = BooksAdapter { book ->
             val action = BooksListFragmentDirections
-                .actionBooksListFragmentToBookDetailsFragment(book)
+                .actionBooksListFragmentToBookDetailsFragment(
+                    title = book.title ?: "",
+                    description = book.description ?: "",
+                    imageUrl = book.imageUrl ?: "",
+                    buyLink = book.buyLink ?: ""
+                )
             findNavController().navigate(action)
         }
+
 
         binding.recyclerViewBooks.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewBooks.adapter = adapter
 
         viewModel.books.observe(viewLifecycleOwner) { books ->
-            android.util.Log.d("BooksListFragment", "Кількість книжок: ${books.size}")
+            Log.d("BooksListFragment", "Кількість книжок: ${books.size}")
+            if (books.isEmpty()) {
+                Log.e("BooksListFragment", "Книги не завантажились або порожній список!")
+            }
             adapter.submitList(books)
         }
+
+
         Log.d("BooksListFragment", "Передано categoryId: ${args.categoryId}")
-
-
         viewModel.loadBooks(categoryId = args.categoryId)
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "category")
 data class CategoryEntity(
-    @PrimaryKey(autoGenerate = true) val idKey: Int
-) {
-
-}
+    @PrimaryKey val idKey: String,  // Використовуєш listNameEncoded як id
+    val name: String,
+    val lastDate: String
+)

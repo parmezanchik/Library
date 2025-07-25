@@ -12,7 +12,7 @@ import com.first.sloots.library.data.db.entity.CategoryEntity
         BookEntity::class,
         CategoryEntity::class
     ],
-    version = 1
+    version = 3
 )
 abstract class AppDataBase : RoomDatabase() {
     abstract fun bookDao(): BookDao
