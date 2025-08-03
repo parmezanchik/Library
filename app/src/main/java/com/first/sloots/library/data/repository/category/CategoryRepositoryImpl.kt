@@ -20,6 +20,10 @@ class CategoryRepositoryImpl(
     private val categoryDao: CategoryDao
 ) : CategoryRepository {
 
+    companion object{
+        const val WEEK = 7
+    }
+
     override suspend fun getCategories(): List<CategoryDM?> {
         val data = settingsUseCase.getData()
         val dbCategories = categoryDao.getCategories()
@@ -42,23 +46,13 @@ class CategoryRepositoryImpl(
                 }
             }
 
-            // Зберегти категорії в Room
             categoryDao.insert(categories.mapNotNull { it?.toCategoryEntity() })
+            settingsUseCase.setData(Instant.now().toString())
 
-            //TODO: мапер який з нетворка буде робити буксЕнтеті + айді категорії додати свої
-            // ❗ Цей блок дублюється і НЕ ПОТРІБЕН (бо вже вище зроблено). Тому залишаю закоментованим для тебе.
-            /*
-            categories.forEach { category ->
-                val categoryId = category?.listNameEncoded.orEmpty()
-                val books = category?.books?.mapNotNull { it?.toEntity(categoryId) }.orEmpty()
-                booksUseCase.saveBooks(books)
-            }
-            */
 
-            //TODO: мапер який з ДМ зробить Ентеті категорію
-            // ❗ Це вже зроблено вище: categoryDao.insert(categories.mapNotNull { it?.toEntity() })
 
             categories
+
         } else {
             categoryDao.getCategories().map { it.toDomain() }
         }
@@ -68,12 +62,12 @@ class CategoryRepositoryImpl(
 
     fun hasWeekPassedSince(dateString: String): Boolean {
         return try {
-            val inputDate = Instant.parse(dateString) // Парсимо ISO дату
-            val now = Instant.now() // Поточний час у UTC
-            val duration = Duration.between(inputDate, now) // Різниця
-            duration.toDays() >= 7 // Перевіряємо, чи ≥ 7 днів
+            val inputDate = Instant.parse(dateString)
+            val now = Instant.now()
+            val duration = Duration.between(inputDate, now)
+            duration.toDays() >= WEEK
         } catch (e: DateTimeParseException) {
-            false // Якщо формат дати некоректний — повертаємо false
+            false 
         }
     }
 

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.first.sloots.library.databinding.FragmentBooksListBinding
 import com.first.sloots.library.ui.book.adapter.BooksAdapter
+import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BooksListFragment : Fragment() {
@@ -41,7 +42,7 @@ class BooksListFragment : Fragment() {
                     title = book.title ?: "",
                     description = book.description ?: "",
                     imageUrl = book.imageUrl ?: "",
-                    buyLink = book.buyLink ?: ""
+                    buyLink = Gson().toJson(book.buyLink ?: "")
                 )
             findNavController().navigate(action)
         }

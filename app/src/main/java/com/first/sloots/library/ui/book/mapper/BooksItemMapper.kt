@@ -13,7 +13,7 @@ fun BooksItem.toDomain(): BooksDM {
         publisher = this.publisher.orEmpty(),
         imageUrl = this.bookImage.orEmpty(),
         rank = this.rank ?: 0,
-        buyLink = this.amazonProductUrl.orEmpty()
+        buyLink = this.buyLinks.orEmpty()
     )
 }
 

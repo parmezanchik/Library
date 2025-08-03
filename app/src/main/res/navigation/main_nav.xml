@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav"
-    app:startDestination="@id/categoryListFragment"
+    app:startDestination="@id/splashFragment"
     >
 
     <fragment
@@ -49,5 +49,25 @@
             android:name="buyLink"
             app:argType="string"
             android:defaultValue="" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.first.sloots.library.ui.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_categoryListFragment"
+            app:destination="@id/categoryListFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.first.sloots.library.ui.auth.SignInFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/action_signInFragment_to_categoryListFragment"
+            app:destination="@id/categoryListFragment" />
     </fragment>
 </navigation>
